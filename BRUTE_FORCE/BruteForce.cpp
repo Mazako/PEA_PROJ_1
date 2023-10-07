@@ -2,14 +2,14 @@
 #include <iostream>
 BruteForce::BruteForce() = default;
 
-int ** BruteForce::createPermutation(int n, int *array) {
-    auto allPermutations = new int *[PeaUtils::factorial(n)];
-    int currentPos = 0;
-    allPermutations[currentPos++] = PeaUtils::copyArray(n, array);
+void BruteForce::iteratePermutations(int n, int *array, std::function<void(int *)> supplier) {
+    int globalCounter = 0;
+    int factorial = PeaUtils::factorial(n);
     auto c = new int[n];
     for (int i = 0; i < n; i++) {
         c[i] = 0;
     }
+    supplier(array);
     int i = 0;
     while (i < n) {
         if (c[i] < i) {
@@ -18,7 +18,8 @@ int ** BruteForce::createPermutation(int n, int *array) {
             } else {
                 PeaUtils::swap(c[i], i, array);
             }
-            allPermutations[currentPos++] = PeaUtils::copyArray(n, array);
+            std::cout << globalCounter++ << " / " << factorial << std::endl;
+            supplier(array);
             c[i]++;
             i = 0;
         } else {
@@ -26,19 +27,19 @@ int ** BruteForce::createPermutation(int n, int *array) {
             i++;
         }
     }
-    return allPermutations;
 }
 
-ShortestPathResults * BruteForce::performShortestPath(TspMatrix *matrix, int permutationLength, int **permutations) {
+ShortestPathResults * BruteForce::performShortestPath(TspMatrix *matrix) {
     int *minPath = nullptr;
     unsigned long long int lowestCost = INT64_MAX;
-    for (int i = 0; i < permutationLength; i++) {
-        unsigned long long int cost = matrix->calculateCost(permutations[i]);
+    auto shortestPathCalculator = [&minPath, &lowestCost, &matrix](int* path){
+        unsigned long long cost = matrix->calculateCost(path);
         if (cost < lowestCost) {
             lowestCost = cost;
-            minPath = permutations[i];
+            minPath = path;
         }
-    }
+    };
+    iteratePermutations(matrix->getN(), PeaUtils::createArrayFromZeroToNMinusOne(matrix->getN()), shortestPathCalculator);
     return new ShortestPathResults(lowestCost,
                                    matrix->getN(),
                                    PeaUtils::copyArray(matrix->getN(), minPath),
@@ -47,11 +48,9 @@ ShortestPathResults * BruteForce::performShortestPath(TspMatrix *matrix, int per
 
 ShortestPathResults **BruteForce::performShortestPath(RandomTspMatrixSet *set) {
     auto **results = new ShortestPathResults * [set->getN()];
-    auto permutations = createPermutation(set->getMatrixSize(), PeaUtils::createArrayFromZeroToNMinusOne(set->getMatrixSize()));
-    int factorial = PeaUtils::factorial(set->getMatrixSize());
     for (int i = 0; i < set->getN(); i++) {
         auto matrix = set->getMatrices()[i];
-        auto result = performShortestPath(matrix, factorial, permutations);
+        auto result = performShortestPath(matrix);
         results[i] = result;
     }
     return results;
