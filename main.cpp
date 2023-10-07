@@ -1,6 +1,12 @@
 #include <iostream>
+#include "PEA_UTILS/PeaUtils.h"
+
+using std::cout;
+using std::endl;
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+    TspMatrix* matrix = PeaUtils::generateRandomTSPInstance();
+    std::string res = PeaUtils::matrixToString(matrix);
+    cout << res << endl;
+    delete matrix;
 }
