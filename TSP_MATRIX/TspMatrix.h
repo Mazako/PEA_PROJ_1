@@ -15,6 +15,8 @@ public:
     int getN() const;
 
     int **getMatrices() const;
+
+    int calculateCost(int* path);
 };
 
 

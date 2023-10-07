@@ -19,3 +19,17 @@ TspMatrix::TspMatrix(int n, int **matrix) {
     this->n = n;
     this->matrix = matrix;
 }
+
+int TspMatrix::calculateCost(int *path) {
+    int first = path[0];
+    int v1 = path[0];
+    int v2;
+    int totalCost = 0;
+    for (int i = 1; i < this->n; i++) {
+        v2 = path[i];
+        totalCost += matrix[v1][v2];
+        v1 = v2;
+    }
+    totalCost += matrix[v2][first];
+    return totalCost;
+}
