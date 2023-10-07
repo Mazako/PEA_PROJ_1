@@ -5,13 +5,13 @@
 class ShortestPathResults {
 private:
     bool success;
-    int cost;
+    unsigned long long int cost;
     int* path;
     int n;
     long nanoTime;
     ShortestPathResults(bool success);
 public:
-    ShortestPathResults(int cost, int n, int *path, long nanoTime);
+    ShortestPathResults(unsigned long long int cost, int n, int *path, long nanoTime);
     static ShortestPathResults* createFailure();
     ~ShortestPathResults();
     std::string toString();

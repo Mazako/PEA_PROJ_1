@@ -11,4 +11,6 @@ add_executable(PEA_PROJ_1 main.cpp
         BRUTE_FORCE/BruteForce.cpp
         BRUTE_FORCE/BruteForce.h
         TSP_MATRIX_SET/RandomTspMatrixSet.cpp
-        TSP_MATRIX_SET/RandomTspMatrixSet.h SHORTEST_PATH_RESULTS/ShortestPathResults.cpp SHORTEST_PATH_RESULTS/ShortestPathResults.h)
+        TSP_MATRIX_SET/RandomTspMatrixSet.h
+        SHORTEST_PATH_RESULTS/ShortestPathResults.cpp
+        SHORTEST_PATH_RESULTS/ShortestPathResults.h)

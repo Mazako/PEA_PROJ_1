@@ -1,6 +1,6 @@
 #include "ShortestPathResults.h"
 
-ShortestPathResults::ShortestPathResults(int cost, int n, int *path, long nanoTime) : cost(cost), path(path), n(n), nanoTime(nanoTime), success(true) {}
+ShortestPathResults::ShortestPathResults(unsigned long long int cost, int n, int *path, long nanoTime) : cost(cost), path(path), n(n), nanoTime(nanoTime), success(true) {}
 
 ShortestPathResults::~ShortestPathResults() {
     delete this->path;
@@ -18,4 +18,8 @@ std::string ShortestPathResults::toString() {
 
 ShortestPathResults *ShortestPathResults::createFailure() {
     return new ShortestPathResults(false);
+}
+
+ShortestPathResults::ShortestPathResults(bool success) {
+    this->success = false;
 }

@@ -28,6 +28,8 @@ public:
     static void iterateMatrix(TspMatrix *tspMatrix, std::function<void(int, int, int)> function);
 
     static TspMatrix *readMatrixFromFile(const std::string &filename);
+
+    static int factorial(int n);
 };
 
 

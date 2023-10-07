@@ -11,9 +11,10 @@ private:
     BruteForce();
 
 public:
-    static std::vector<int *> createPermutation(int n, int *array);
+    static int ** createPermutation(int n, int *array);
 
-    static ShortestPathResults *performShortestPath(TspMatrix *matrix);
+    static ShortestPathResults *
+    performShortestPath(TspMatrix *matrix, int permutationLength, int **permutations);
 
     static ShortestPathResults **performShortestPath(RandomTspMatrixSet* set);
 };

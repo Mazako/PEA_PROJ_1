@@ -1,11 +1,12 @@
 #include <iostream>
 #include "PEA_UTILS/PeaUtils.h"
 #include "BRUTE_FORCE/BruteForce.h"
+#include "TSP_MATRIX_SET/RandomTspMatrixSet.h"
 using std::cout;
 using std::endl;
 
 int main() {
-    TspMatrix *matrix = PeaUtils::readMatrixFromFile("exampleMatrix");
-    cout << PeaUtils::matrixToString(matrix);
-    cout << BruteForce::performShortestPath(matrix)->toString();
+    auto set = new RandomTspMatrixSet(1, 5);
+    auto results = BruteForce::performShortestPath(set);
+    cout << results[0]->toString();
 }

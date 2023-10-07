@@ -16,7 +16,7 @@ public:
 
     int **getMatrices() const;
 
-    int calculateCost(int* path);
+    unsigned long long int calculateCost(int* path);
 };
 
 

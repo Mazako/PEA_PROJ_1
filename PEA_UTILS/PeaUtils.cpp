@@ -9,7 +9,7 @@ void PeaUtils::swap(int i, int j, int *array) {
 int PeaUtils::randomInt() {
     std::random_device device;
     std::mt19937 rng(device());
-    std::uniform_int_distribution<> distribution(0, INT32_MAX);
+    std::uniform_int_distribution<> distribution(0, 100);
     return distribution(rng);
 }
 
@@ -96,6 +96,14 @@ TspMatrix *PeaUtils::readMatrixFromFile(const std::string &filename) {
         }
     }
     return new TspMatrix(count, matrix);
+}
+
+int PeaUtils::factorial(int n) {
+    int result = 1;
+    for (int i = 2; i <= n; i++) {
+        result *= i;
+    }
+    return result;
 }
 
 PeaUtils::PeaUtils() = default;
