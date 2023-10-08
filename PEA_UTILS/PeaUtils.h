@@ -6,8 +6,8 @@
 #include <functional>
 #include <fstream>
 #include <sstream>
-#include "../TSP_MATRIX/TspMatrix.h"
-#include "../SHORTEST_PATH_RESULTS/ShortestPathResults.h"
+#include "TspMatrix.h"
+#include "ShortestPathResults.h"
 
 class PeaUtils {
 private:

@@ -1,7 +1,7 @@
 #ifndef PEA_PROJ_1_RANDOMTSPMATRIXSET_H
 #define PEA_PROJ_1_RANDOMTSPMATRIXSET_H
-#include "../TSP_MATRIX/TspMatrix.h"
-#include "../PEA_UTILS/PeaUtils.h"
+#include "TspMatrix.h"
+#include "PeaUtils.h"
 
 class RandomTspMatrixSet {
 private:

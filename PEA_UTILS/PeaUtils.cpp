@@ -35,12 +35,12 @@ TspMatrix *PeaUtils::generateRandomTSPInstance(int n) {
 
 std::string PeaUtils::matrixToString(TspMatrix *tspMatrix) {
     std::string str;
-    iterateMatrix(tspMatrix, [&str, &tspMatrix](int i, int j, int a) {
-        str.append(std::to_string(a)).append("\t");
-        if (j == tspMatrix->getN() - 1) {
+    for (int i = 0; i < tspMatrix->getN(); i++) {
+        str.append(arrayToString(tspMatrix->getN(), tspMatrix->getMatrices()[i]));
+        if (i != tspMatrix->getN() - 1) {
             str.append("\n");
         }
-    });
+    }
     return str;
 }
 
@@ -109,7 +109,10 @@ int PeaUtils::factorial(int n) {
 std::string PeaUtils::arrayToString(int n, int *arr) {
     std::string str;
     for (int i = 0; i < n; i++) {
-        str.append(std::to_string(arr[i])).append(" ");
+        str.append(std::to_string(arr[i]));
+        if (i != n - 1) {
+            str.append(" ");
+        }
     }
     return str;
 }

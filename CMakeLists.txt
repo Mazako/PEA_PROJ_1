@@ -2,6 +2,13 @@ cmake_minimum_required(VERSION 3.25)
 project(PEA_PROJ_1)
 
 set(CMAKE_CXX_STANDARD 17)
+set(SOURCE_FILES main.cpp)
+
+include_directories(BRUTE_FORCE
+        "PEA_UTILS"
+        SHORTEST_PATH_RESULTS
+        TSP_MATRIX
+        TSP_MATRIX_SET)
 
 add_executable(PEA_PROJ_1 main.cpp
         PEA_UTILS/PeaUtils.cpp

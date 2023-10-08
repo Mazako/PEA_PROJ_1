@@ -4,9 +4,9 @@
 #include <vector>
 #include <functional>
 #include <chrono>
-#include "../PEA_UTILS/PeaUtils.h"
-#include "../SHORTEST_PATH_RESULTS/ShortestPathResults.h"
-#include "../TSP_MATRIX_SET/RandomTspMatrixSet.h"
+#include "PeaUtils.h"
+#include "ShortestPathResults.h"
+#include "RandomTspMatrixSet.h"
 
 
 class BruteForce {
