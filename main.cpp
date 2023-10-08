@@ -7,7 +7,6 @@ using std::cout;
 using std::endl;
 
 int main() {
-    auto set = new RandomTspMatrixSet(1, 5);
-    auto results = BruteForce::performShortestPath(set);
-    cout << results[0]->toString();
+    auto set = new RandomTspMatrixSet(100, 9);
+    auto results = BruteForce::performShortestPath(set, 50000);
 }

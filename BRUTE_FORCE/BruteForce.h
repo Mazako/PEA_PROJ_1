@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <functional>
+#include <chrono>
 #include "../PEA_UTILS/PeaUtils.h"
 #include "../SHORTEST_PATH_RESULTS/ShortestPathResults.h"
 #include "../TSP_MATRIX_SET/RandomTspMatrixSet.h"
@@ -13,12 +14,13 @@ private:
     BruteForce();
 
 public:
-    static void iteratePermutations(int n, int *array, std::function<void(int *)> supplier);
+    static void
+    iteratePermutations(int n, int *array, std::function<void(int *)> iterateFunction, long timeLimitInMillis);
 
     static ShortestPathResults *
-    performShortestPath(TspMatrix *matrix);
+    performShortestPath(TspMatrix *matrix, long timeLimitInMillis);
 
-    static ShortestPathResults **performShortestPath(RandomTspMatrixSet* set);
+    static ShortestPathResults **performShortestPath(RandomTspMatrixSet *set, long timeLimitInMillis);
 };
 
 

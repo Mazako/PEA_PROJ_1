@@ -9,7 +9,7 @@ void PeaUtils::swap(int i, int j, int *array) {
 int PeaUtils::randomInt() {
     std::random_device device;
     std::mt19937 rng(device());
-    std::uniform_int_distribution<> distribution(0, 100);
+    std::uniform_int_distribution<> distribution(0, 100000);
     return distribution(rng);
 }
 
@@ -104,6 +104,26 @@ int PeaUtils::factorial(int n) {
         result *= i;
     }
     return result;
+}
+
+std::string PeaUtils::arrayToString(int n, int *arr) {
+    std::string str;
+    for (int i = 0; i < n; i++) {
+        str.append(std::to_string(arr[i])).append(" ");
+    }
+    return str;
+}
+
+long double PeaUtils::calculateAvgTime(int resultCount, ShortestPathResults **results) {
+    long long totalTime = 0.;
+    int successCount = 0;
+    for (int i = 0; i < resultCount; i++) {
+        if (results[i]->isSuccess()) {
+            successCount++;
+            totalTime += results[i]->getNanoTime();
+        }
+    }
+    return (long double) totalTime / successCount;
 }
 
 PeaUtils::PeaUtils() = default;

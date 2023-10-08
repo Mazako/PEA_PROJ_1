@@ -7,6 +7,7 @@
 #include <fstream>
 #include <sstream>
 #include "../TSP_MATRIX/TspMatrix.h"
+#include "../SHORTEST_PATH_RESULTS/ShortestPathResults.h"
 
 class PeaUtils {
 private:
@@ -27,9 +28,13 @@ public:
 
     static void iterateMatrix(TspMatrix *tspMatrix, std::function<void(int, int, int)> function);
 
+    static std::string arrayToString(int n, int *arr);
+
     static TspMatrix *readMatrixFromFile(const std::string &filename);
 
     static int factorial(int n);
+
+    static long double calculateAvgTime(int resultCount, ShortestPathResults **results);
 };
 
 
