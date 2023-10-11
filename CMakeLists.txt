@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(SOURCE_FILES main.cpp)
 
 include_directories(BRUTE_FORCE
-        "PEA_UTILS"
+        PEA_UTILS
         SHORTEST_PATH_RESULTS
         TSP_MATRIX
         TSP_MATRIX_SET)
