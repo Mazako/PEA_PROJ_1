@@ -20,7 +20,13 @@ int main(int argc, char *argv[]) {
             cout << "Starting program in brute_force data generation mode." << endl;
             generateBruteForceData(matrixSize, count);
         }
+    } else {
+        auto set = PeaUtils::readMatrixFromFile("exampleMatrix");
+        auto results = BruteForce::performShortestPath(set, 1000000);
+        cout << results->toString() << endl;
+
     }
+
 }
 
 void generateBruteForceData(int matrixSize, int count) {

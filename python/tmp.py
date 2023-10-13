@@ -6,7 +6,7 @@ from python_tsp.exact import solve_tsp_brute_force
 cpp_program = '../cmake-build-debug/PEA_PROJ_1.exe'
 BRUTE_FORCE_ARG = 'GENERATE_BRUTE'
 
-subprocess.run([cpp_program, BRUTE_FORCE_ARG, '4', '5'])
+subprocess.run([cpp_program, BRUTE_FORCE_ARG, '10', '1'])
 with open('./brute_force_sample.txt', 'r') as file:
     [matrixSize, count] = file.readline().split(' ')
     matrixSize = int(matrixSize)

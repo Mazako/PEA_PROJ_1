@@ -1,4 +1,5 @@
 #include "BruteForce.h"
+#include "MULTIPLE_SHORTEST_PATH_MULTIPLE_RESULTS/MultipleShortestPathResults.h"
 #include <iostream>
 
 BruteForce::BruteForce() = default;
@@ -64,7 +65,7 @@ ShortestPathResults *BruteForce::performShortestPath(TspMatrix *matrix, long tim
     }
 }
 
-ShortestPathResults **BruteForce::performShortestPath(RandomTspMatrixSet *set, long timeLimitInMillis) {
+MultipleShortestPathResults * BruteForce::performShortestPath(RandomTspMatrixSet *set, long timeLimitInMillis) {
     auto **results = new ShortestPathResults *[set->getN()];
     for (int i = 0; i < set->getN(); i++) {
         auto matrix = set->getMatrices()[i];
@@ -77,6 +78,6 @@ ShortestPathResults **BruteForce::performShortestPath(RandomTspMatrixSet *set, l
     }
     long double avgTime = PeaUtils::calculateAvgTime(set->getN(), results);
     std::cout << "Sredni wynik: " << std::to_string(avgTime) << std::endl;
-    return results;
+    return new MultipleShortestPathResults(set->getN(), avgTime);
 
 }

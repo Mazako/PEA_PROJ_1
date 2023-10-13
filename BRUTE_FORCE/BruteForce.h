@@ -7,6 +7,7 @@
 #include "PeaUtils.h"
 #include "ShortestPathResults.h"
 #include "RandomTspMatrixSet.h"
+#include "MULTIPLE_SHORTEST_PATH_MULTIPLE_RESULTS/MultipleShortestPathResults.h"
 
 
 class BruteForce {
@@ -20,7 +21,7 @@ public:
     static ShortestPathResults *
     performShortestPath(TspMatrix *matrix, long timeLimitInMillis);
 
-    static ShortestPathResults **performShortestPath(RandomTspMatrixSet *set, long timeLimitInMillis);
+    static MultipleShortestPathResults * performShortestPath(RandomTspMatrixSet *set, long timeLimitInMillis);
 };
 
 
