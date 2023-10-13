@@ -1,5 +1,5 @@
 #include "BruteForce.h"
-#include "MULTIPLE_SHORTEST_PATH_MULTIPLE_RESULTS/MultipleShortestPathResults.h"
+#include "MultipleShortestPathResults.h"
 #include <iostream>
 
 BruteForce::BruteForce() = default;
