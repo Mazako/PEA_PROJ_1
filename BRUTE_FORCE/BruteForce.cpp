@@ -76,7 +76,7 @@ ShortestPathResults **BruteForce::performShortestPath(RandomTspMatrixSet *set, l
         results[i] = result;
     }
     long double avgTime = PeaUtils::calculateAvgTime(set->getN(), results);
-    std::cout << "Sredni wynik: " << std::to_string(avgTime) << std::endl;
+    std::cout << "Sredni wynik: " << std::to_string(avgTime)  << " ms"<< std::endl;
     return results;
 
 }

@@ -21,6 +21,9 @@ int main(int argc, char *argv[]) {
             generateBruteForceData(matrixSize, count);
         }
     }
+
+    auto set = new RandomTspMatrixSet(100, 8);
+    BruteForce::performShortestPath(set, INT64_MAX);
 }
 
 void generateBruteForceData(int matrixSize, int count) {
