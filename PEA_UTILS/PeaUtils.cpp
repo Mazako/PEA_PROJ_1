@@ -124,4 +124,57 @@ long double PeaUtils::calculateAvgTime(int resultCount, ShortestPathResults **re
     return (long double) totalTime / successCount;
 }
 
+int **PeaUtils::copyMatrix(int n, int **matrix) {
+    int **newArray = new int *[n];
+    for (int i = 0; i < n; i++) {
+        newArray[i] = copyArray(n, matrix[i]);
+    }
+    return newArray;
+}
+
+int PeaUtils::minimum(int n, const int *array) {
+    int minimum = array[0];
+    if (minimum == -1) {
+        minimum = array[1];
+    }
+    for (int i = 0; i < n; i++) {
+        if (array[i] > -1 && array[i] < minimum) {
+            minimum = array[i];
+        }
+    }
+    return minimum;
+}
+
+int PeaUtils::minimumColumn(int n, int **matrix, int column) {
+    int minimum = matrix[0][column];
+    if (minimum == -1) {
+        minimum = matrix[1][column];
+    }
+    for (int i = 1; i < n; i++) {
+        if (matrix[i][column] > -1 && matrix[i][column] < minimum) {
+            minimum = matrix[i][column];
+        }
+    }
+    return minimum;
+}
+
+std::vector<int> PeaUtils::createVectorFromZeroToNMinusOne(int n) {
+    std::vector<int> v;
+    v.reserve(n);
+    for (int i = 0; i < n; i++) {
+        v.push_back(i);
+    }
+    return v;
+}
+
+std::vector<int> PeaUtils::subtractVectors(std::vector<int> &v1, std::vector<int> &v2) {
+    std::vector<int> result;
+    for (const auto &item: v1) {
+        if (std::find(v2.begin(), v2.end(), item) == v2.end()) {
+            result.push_back(item);
+        }
+    }
+    return result;
+}
+
 PeaUtils::PeaUtils() = default;

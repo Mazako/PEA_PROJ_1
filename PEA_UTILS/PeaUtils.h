@@ -18,7 +18,15 @@ public:
 
     static int *copyArray(int n, const int *array);
 
+    static int **copyMatrix(int n, int **matrix);
+
+    static int minimum(int n, const int *array);
+
+    static int minimumColumn(int n, int **matrix, int column);
+
     static int *createArrayFromZeroToNMinusOne(int n);
+
+    static std::vector<int> createVectorFromZeroToNMinusOne(int n);
 
     static int randomInt();
 
@@ -35,6 +43,8 @@ public:
     static int factorial(int n);
 
     static long double calculateAvgTime(int resultCount, ShortestPathResults **results);
+
+    static std::vector<int> subtractVectors(std::vector<int> &v1, std::vector<int> &v2);
 };
 
 

@@ -4,6 +4,7 @@
 #include "PeaUtils.h"
 #include "BruteForce.h"
 #include "RandomTspMatrixSet.h"
+#include "BranchAndBoundMatrixReduction.h"
 
 using std::cout;
 using std::endl;
@@ -21,9 +22,11 @@ int main(int argc, char *argv[]) {
             generateBruteForceData(matrixSize, count);
         }
     } else {
-        auto set = PeaUtils::readMatrixFromFile("exampleMatrix");
-        auto results = BruteForce::performShortestPath(set, 1000000);
+        auto set = PeaUtils::generateRandomTSPInstance(15);
+        auto results = BranchAndBoundMatrixReduction::solve(set, 1000000);
         cout << results->toString() << endl;
+//        auto res2 = BruteForce::performShortestPath(set, 10000000);
+//        cout << res2->toString() << endl;
 
     }
 
