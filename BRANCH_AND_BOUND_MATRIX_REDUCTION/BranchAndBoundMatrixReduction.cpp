@@ -9,6 +9,9 @@ ShortestPathResults *BranchAndBoundMatrixReduction::solve(TspMatrix *matrix, lon
         }
     };
 
+    unsigned long long upperBound = -1;
+    ReducedTspMatrix *best = nullptr;
+
     std::vector<int> allVertices = PeaUtils::createVectorFromZeroToNMinusOne(matrix->getN());
     std::priority_queue<ReducedTspMatrix *, std::vector<ReducedTspMatrix *>, QueueComparator> queue;
     auto rootPath = reduceMatrix(matrix->getN(),
@@ -23,51 +26,59 @@ ShortestPathResults *BranchAndBoundMatrixReduction::solve(TspMatrix *matrix, lon
                                  -1,
                                  -1);
     queue.push(rootPath);
-    ReducedTspMatrix* current;
-    do {
+    ReducedTspMatrix *current;
+    while (!queue.empty()) {
         current = queue.top();
         queue.pop();
-        auto path = current->getPath();
-        std::vector remainingVertices = PeaUtils::subtractVectors(allVertices, path);
-        int lastElement = current->getLastElementFromPath();
-        for (const auto &vertex: remainingVertices) {
-            int **stepMatrix = PeaUtils::copyMatrix(current->getN(), current->getMatrices());
-            auto reduced = reduceMatrix(current->getN(),
-                                        stepMatrix,
-                                        current->getCost(),
-                                        [&current, &vertex]() {
-                                            std::vector copy(current->getPath());
-                                            copy.push_back(vertex);
-                                            return copy;
-                                        },
-                                        current->getMatrices()[lastElement][vertex],
-                                        lastElement,
-                                        vertex);
-            queue.push(reduced);
-            auto currentTime = std::chrono::high_resolution_clock::now();
+        if (upperBound == -1 || current->getCost() < upperBound) {
+            auto path = current->getPath();
+            std::vector remainingVertices = PeaUtils::subtractVectors(allVertices, path);
+            int lastElement = current->getLastElementFromPath();
+            for (const auto &vertex: remainingVertices) {
+                int **stepMatrix = PeaUtils::copyMatrix(current->getN(), current->getMatrices());
+                auto reduced = reduceMatrix(current->getN(),
+                                            stepMatrix,
+                                            current->getCost(),
+                                            [&current, &vertex]() {
+                                                std::vector copy(current->getPath());
+                                                copy.push_back(vertex);
+                                                return copy;
+                                            },
+                                            current->getMatrices()[lastElement][vertex],
+                                            lastElement,
+                                            vertex);
+                queue.push(reduced);
+                if (reduced->getPath().size() == matrix->getN()) {
+                    if (upperBound == -1 || reduced->getCost() < upperBound) {
+                        delete best;
+                        best = reduced->copy();
+                        upperBound = reduced->getCost();
+                    }
+                }
+                auto currentTime = std::chrono::high_resolution_clock::now();
+                if (std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - start).count() >
+                    timeLimitInMillis) {
+                    return ShortestPathResults::createFailure();
+                }
 
-            if (std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - start).count() > timeLimitInMillis) {
-                return ShortestPathResults::createFailure();
             }
         }
-        if (current->getPath().size() != matrix->getN()) {
-            delete current;
+        delete current;
+        auto currentTime = std::chrono::high_resolution_clock::now();
+        if (std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - start).count() >
+            timeLimitInMillis) {
+            return ShortestPathResults::createFailure();
         }
-    } while (current->getPath().size() != matrix->getN());
+    }
 
     auto end = std::chrono::high_resolution_clock::now();
-    while (!queue.empty()) {
-        auto ref = queue.top();
-        queue.pop();
-        delete ref;
-    }
 
-    int* path = new int [matrix->getN()];
+    int *path = new int[matrix->getN()];
     for (int i = 0; i < matrix->getN(); i++) {
-        path[i] = current->getPath()[i];
+        path[i] = best->getPath()[i];
     }
-    return new ShortestPathResults(current->getCost(),
-                                   current->getN(),
+    return new ShortestPathResults(best->getCost(),
+                                   best->getN(),
                                    path,
                                    std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count());
 }

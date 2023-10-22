@@ -3,6 +3,7 @@
 
 
 #include "TspMatrix.h"
+#include "PeaUtils.h"
 
 class ReducedTspMatrix : public TspMatrix{
 private:
@@ -16,6 +17,8 @@ public:
     const std::vector<int> &getPath() const;
 
     int getLastElementFromPath();
+
+    ReducedTspMatrix* copy();
 };
 
 

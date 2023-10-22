@@ -15,3 +15,10 @@ const std::vector<int> &ReducedTspMatrix::getPath() const {
 int ReducedTspMatrix::getLastElementFromPath() {
     return path.back();
 }
+
+ReducedTspMatrix *ReducedTspMatrix::copy() {
+    int** newMatrix = PeaUtils::copyMatrix(getN(), getMatrices());
+    std::vector<int> newVector = std::vector<int>(path);
+    return new ReducedTspMatrix(getN(), newMatrix, cost, newVector);
+}
+
