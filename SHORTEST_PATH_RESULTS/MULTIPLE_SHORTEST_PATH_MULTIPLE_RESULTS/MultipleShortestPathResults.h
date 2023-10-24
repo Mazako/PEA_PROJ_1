@@ -4,13 +4,13 @@
 #include <string>
 class MultipleShortestPathResults {
 private:
-    long double n;
+    long n;
     long double avgTime;
 
 public:
-    MultipleShortestPathResults(long double n, long double avgTime);
+    MultipleShortestPathResults(long n, long double avgTime);
 
-    long double getN() const;
+    long getN() const;
 
     long double getAvgTime() const;
 

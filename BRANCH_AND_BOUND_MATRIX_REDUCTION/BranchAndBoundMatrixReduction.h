@@ -5,6 +5,8 @@
 #include "TspMatrix.h"
 #include "REDUCED_TSP_MATRIX/ReducedTspMatrix.h"
 #include "PeaUtils.h"
+#include "RandomTspMatrixSet.h"
+#include "MultipleShortestPathResults.h"
 
 
 class BranchAndBoundMatrixReduction {
@@ -18,6 +20,8 @@ private:
                                           int vertexTo);
 public:
     static ShortestPathResults * solve(TspMatrix *matrix, long timeLimitInMillis);
+    static MultipleShortestPathResults * solve(RandomTspMatrixSet *set, long timeLimitInMillis);
+
 };
 
 

@@ -1,8 +1,8 @@
 #include "MultipleShortestPathResults.h"
 
-MultipleShortestPathResults::MultipleShortestPathResults(long double n, long double avgTime) : n(n), avgTime(avgTime) {}
+MultipleShortestPathResults::MultipleShortestPathResults(long n, long double avgTime) : n(n), avgTime(avgTime) {}
 
-long double MultipleShortestPathResults::getN() const {
+long  MultipleShortestPathResults::getN() const {
     return n;
 }
 

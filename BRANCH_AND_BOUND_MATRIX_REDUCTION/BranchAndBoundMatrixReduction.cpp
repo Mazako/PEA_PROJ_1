@@ -1,4 +1,5 @@
 #include <chrono>
+#include <iostream>
 #include "BranchAndBoundMatrixReduction.h"
 
 ShortestPathResults *BranchAndBoundMatrixReduction::solve(TspMatrix *matrix, long timeLimitInMillis) {
@@ -127,4 +128,14 @@ ReducedTspMatrix *BranchAndBoundMatrixReduction::reduceMatrix(int n,
 
     totalReduction += stepCost + parentReductionCost;
     return new ReducedTspMatrix(n, matrix, totalReduction, pathSupplier());
+}
+
+MultipleShortestPathResults * BranchAndBoundMatrixReduction::solve(RandomTspMatrixSet *set, long timeLimitInMillis) {
+    auto **results = new ShortestPathResults * [set->getN()];
+    for (int i = 0; i < set->getN(); i++) {
+        results[i] = solve(set->getMatrices()[i], timeLimitInMillis);
+    }
+    auto avg = PeaUtils::calculateAvgTime(set->getN(), results);
+    std::cout << "Branch and bound - sredni wynik: " << avg << " ms\n";
+    return new MultipleShortestPathResults(set->getN(), avg);
 }
