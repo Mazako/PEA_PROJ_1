@@ -22,28 +22,44 @@ ShortestPathResults *DynamicProgramming::solve(TspMatrix *matrix, long timeLimit
  *
  * **/
     delete memo;
+    delete memoPath;
     int n = matrix->getN();
     memo = new unsigned long *[n];
+    memoPath = new int *[n];
     for (int i = 0; i < n; i++) {
         memo[i] = new unsigned long[1 << (n -1)];
+        memoPath[i] = new int[1 << (n -1)];
         for (int j = 0; j < 1 << (n - 1); j++) {
             memo[i][j] = 0;
+            memoPath[i][j] = 0;
         }
     }
 
     auto start = std::chrono::high_resolution_clock::now();
 
     unsigned long long result = INT64_MAX;
+    int bestChild = -1;
 
     for (int i = 1; i < n; i++) {
         int mask = ((1 << (n- 1)) - 1) & ~(1 << (i - 1));
-        result = std::min(result, step(matrix, i, mask) + matrix->getMatrices()[0][i]); // maska wszystkie jedynki
+        auto newResult = step(matrix, i, mask) + matrix->getMatrices()[0][i];
+        if (newResult < result) {
+            result = newResult;
+            bestChild = i;
+        }
     }
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-    std::cout << result << std::endl;
-    std::cout << duration.count();
-    return nullptr;
+    int *path = new int[n];
+    path[0] = 0;
+    path[1] = bestChild;
+    int S = (1 << (n- 1)) - 1;
+    for (int i = 2; i < n; i++) {
+        S &= ~(1 << (bestChild - 1));
+        path[i] = memoPath[bestChild][S];
+        bestChild = path[i];
+    }
+    return new ShortestPathResults(result, n, path, duration.count());
 }
 
 unsigned long long int DynamicProgramming::step(TspMatrix *matrix, int vertex, int mask) {
@@ -56,14 +72,20 @@ unsigned long long int DynamicProgramming::step(TspMatrix *matrix, int vertex, i
 
     unsigned long long result = INT64_MAX;
 
+    int bestChild = -1;
     for (int i = 1; i < matrix->getN(); i++) {
         if (i != vertex && (mask & (1 << (i - 1)))) {
             int newMask = mask & ~(1 << (i - 1));
-            result = std::min(result, step(matrix, i, newMask) + matrix->getMatrices()[vertex][i]);
+            auto newResult = step(matrix, i, newMask) + matrix->getMatrices()[vertex][i];
+            if (newResult < result) {
+                result = newResult;
+                bestChild = i;
+            }
         }
     }
 
     memo[vertex][mask] = result;
+    memoPath[vertex][mask] = bestChild;
     return result;
 
 }

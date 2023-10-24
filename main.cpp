@@ -23,9 +23,9 @@ int main(int argc, char *argv[]) {
             generateBruteForceData(matrixSize, count);
         }
     } else {
-        auto mat =  PeaUtils::generateRandomTSPInstance(17);
+        auto mat =  PeaUtils::generateRandomTSPInstance(18);
         cout << BranchAndBoundMatrixReduction::solve(mat, 1000000)->toString() << endl;
-        DynamicProgramming::solve(mat, 10);
+        cout << DynamicProgramming::solve(mat, 10)->toString() << endl;
     }
 
 }

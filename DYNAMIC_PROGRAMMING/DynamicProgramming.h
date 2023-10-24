@@ -6,10 +6,13 @@
 
 class DynamicProgramming {
 private:
-    inline static unsigned long ** memo = nullptr;
+    inline static unsigned long **memo = nullptr;
+    inline static int **memoPath = nullptr;
+
     static unsigned long long int step(TspMatrix *matrix, int vertex, int mask);
+
 public:
-    static ShortestPathResults* solve(TspMatrix* matrix, long timeLimitInMillis);
+    static ShortestPathResults *solve(TspMatrix *matrix, long timeLimitInMillis);
 
 };
 
