@@ -44,14 +44,6 @@ std::string PeaUtils::matrixToString(TspMatrix *tspMatrix) {
     return str;
 }
 
-void PeaUtils::iterateMatrix(TspMatrix *tspMatrix, std::function<void(int, int, int)> function) {
-    for (int i = 0; i < tspMatrix->getN(); i++) {
-        for (int j = 0; j < tspMatrix->getN(); j++) {
-            function(i, j, tspMatrix->getMatrices()[i][j]);
-        }
-    }
-}
-
 int *PeaUtils::copyArray(int n, const int *array) {
     int *newArr = new int[n];
     for (int i = 0; i < n; i++) {
@@ -175,6 +167,25 @@ std::vector<int> PeaUtils::subtractVectors(std::vector<int> &v1, std::vector<int
         }
     }
     return result;
+}
+
+long double PeaUtils::calculateStandardDeviation(int resultCount, ShortestPathResults **results, long double avg) {
+    long double total = .0;
+    for (int i = 0; i < resultCount; i++) {
+        total += std::pow(results[i]->getNanoTime() - avg, 2);
+    }
+    total = total / (resultCount - 1);
+    return std::sqrt(total);
+}
+
+long double PeaUtils::calculateSuccessRate(int resultCount, ShortestPathResults **results) {
+    int successes = 0;
+    for (int i = 0; i < resultCount; i++) {
+        if (results[i]->isSuccess()) {
+            successes++;
+        }
+    }
+    return (double) successes / resultCount;
 }
 
 PeaUtils::PeaUtils() = default;

@@ -76,8 +76,6 @@ MultipleShortestPathResults * BruteForce::performShortestPath(RandomTspMatrixSet
         delete matrix;
         results[i] = result;
     }
-    long double avgTime = PeaUtils::calculateAvgTime(set->getN(), results);
-    std::cout << "Sredni wynik: " << std::to_string(avgTime) << std::endl;
-    return new MultipleShortestPathResults(set->getN(), avgTime);
+    return MultipleShortestPathResults::createFromShortestPathResults(set->getN(), results);
 
 }

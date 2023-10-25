@@ -34,8 +34,6 @@ public:
 
     static std::string matrixToString(TspMatrix *tspMatrix);
 
-    static void iterateMatrix(TspMatrix *tspMatrix, std::function<void(int, int, int)> function);
-
     static std::string arrayToString(int n, int *arr);
 
     static TspMatrix *readMatrixFromFile(const std::string &filename);
@@ -44,7 +42,12 @@ public:
 
     static long double calculateAvgTime(int resultCount, ShortestPathResults **results);
 
+    static long double calculateStandardDeviation(int resultCount, ShortestPathResults ** results, long double avg);
+
+    static long double calculateSuccessRate(int resultCount, ShortestPathResults **results);
+
     static std::vector<int> subtractVectors(std::vector<int> &v1, std::vector<int> &v2);
+
 };
 
 
