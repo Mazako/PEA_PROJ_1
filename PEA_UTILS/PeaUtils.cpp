@@ -75,6 +75,9 @@ TspMatrix *PeaUtils::readMatrixFromFile(const std::string &filename) {
         matrix[i] = new int[count];
         for (int j = 0; j < count; j++) {
             newFile >> matrix[i][j];
+            if (i == j) {
+                matrix[i][j] = -1;
+            }
         }
     }
     return new TspMatrix(count, matrix);

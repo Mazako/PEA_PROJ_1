@@ -10,7 +10,7 @@ ShortestPathResults *BranchAndBoundMatrixReduction::solve(TspMatrix *matrix, lon
         }
     };
 
-    unsigned long long upperBound = -1;
+    long long upperBound = -1;
     ReducedTspMatrix *best = nullptr;
 
     std::vector<int> allVertices = PeaUtils::createVectorFromZeroToNMinusOne(matrix->getN());
@@ -93,7 +93,7 @@ ReducedTspMatrix *BranchAndBoundMatrixReduction::reduceMatrix(int n,
                                                               int vertexTo) {
     unsigned long long totalReduction = 0;
     if (vertexFrom >= 0 && vertexTo >= 0) {
-        matrix[vertexTo][vertexFrom] = -1;
+        matrix[vertexTo][0] = -1;
         for (int i = 0; i < n; i++) {
             matrix[vertexFrom][i] = -1;
             matrix[i][vertexTo] = -1;
