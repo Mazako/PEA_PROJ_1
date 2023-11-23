@@ -66,7 +66,6 @@ MultipleShortestPathResults * BranchAndBoundMatrixReduction::solve(RandomTspMatr
         results[i] = solve(set->getMatrices()[i], timeLimitInMillis, branchMode);
     }
     auto avg = PeaUtils::calculateAvgTime(set->getN(), results);
-    std::cout << "Branch and bound - sredni wynik: " << avg << " ms\n";
     return MultipleShortestPathResults::createFromShortestPathResults(set->getN(), results);
 }
 

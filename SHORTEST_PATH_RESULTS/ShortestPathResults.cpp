@@ -20,7 +20,7 @@ std::string ShortestPathResults::toString() {
     for (int i = 0; i < n; i++) {
         str.append(std::to_string(path[i])).append(" ");
     }
-    str.append("\tczas: ").append(std::to_string((double) nanoTime / 1000)).append(" ms.");
+    str.append("\tczas: ").append(std::to_string((double) nanoTime / 1000000)).append(" ms.");
     return str;
 }
 

@@ -9,7 +9,7 @@ void PeaUtils::swap(int i, int j, int *array) {
 int PeaUtils::randomInt() {
     std::random_device device;
     std::mt19937 rng(device());
-    std::uniform_int_distribution<> distribution(0, 100000);
+    std::uniform_int_distribution<> distribution(0, INT32_MAX);
     return distribution(rng);
 }
 

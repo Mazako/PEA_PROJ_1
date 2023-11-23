@@ -10,9 +10,9 @@ std::string MultipleShortestPathResults::toString() {
     x.append("Ilosc wierzcholkow: ")
         .append(std::to_string(n))
         .append("\tSredni czas: ")
-        .append(std::to_string(avgTime))
+        .append(std::to_string(avgTime / 1000000))
         .append("\tOdchylenie standardowe: ")
-        .append(std::to_string(std))
+        .append(std::to_string(std / 1000000))
         .append("\tSukcesow: ")
         .append(std::to_string(successRate));
     return x;

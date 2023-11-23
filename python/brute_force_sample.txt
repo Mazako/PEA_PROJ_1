@@ -1,0 +1,104 @@
+C:\repos\PEA_PROJ_1\cmake-build-release\PEA_PROJ_1.exe
+PLIK: ../Graphs/tsp_6_1.txt
+BxB (low-cost)
+Ilosc wierzcholkow: 6   koszt: 132      sciezka: 0 1 2 3 4 5    czas: 0.042600 ms.
+BxB (DFS)
+Ilosc wierzcholkow: 6   koszt: 132      sciezka: 0 1 2 3 4 5    czas: 0.098800 ms.
+Dynamicznie
+Ilosc wierzcholkow: 6   koszt: 132      sciezka: 0 1 2 3 4 5    czas: 0.006700 ms.
+
+
+PLIK: ../Graphs/tsp_6_2.txt
+BxB (low-cost)
+Ilosc wierzcholkow: 6   koszt: 80       sciezka: 0 5 1 2 3 4    czas: 0.028500 ms.
+BxB (DFS)
+Ilosc wierzcholkow: 6   koszt: 80       sciezka: 0 5 1 2 3 4    czas: 0.080200 ms.
+Dynamicznie
+Ilosc wierzcholkow: 6   koszt: 80       sciezka: 0 5 1 2 3 4    czas: 0.013200 ms.
+
+
+PLIK: ../Graphs/tsp_10.txt
+BxB (low-cost)
+Ilosc wierzcholkow: 10  koszt: 212      sciezka: 0 5 1 9 6 7 8 2 4 3    czas: 0.602600 ms.
+BxB (DFS)
+Ilosc wierzcholkow: 10  koszt: 212      sciezka: 0 5 1 9 6 7 8 2 4 3    czas: 1.373000 ms.
+Dynamicznie
+Ilosc wierzcholkow: 10  koszt: 212      sciezka: 0 3 4 2 8 7 6 9 1 5    czas: 0.192100 ms.
+
+
+PLIK: ../Graphs/tsp_12.txt
+BxB (low-cost)
+Ilosc wierzcholkow: 12  koszt: 264      sciezka: 0 1 8 4 6 2 11 9 7 5 3 10      czas: 0.600500 ms.
+BxB (DFS)
+Ilosc wierzcholkow: 12  koszt: 264      sciezka: 0 10 3 5 7 9 11 2 6 4 8 1      czas: 16.633500 ms.
+Dynamicznie
+Ilosc wierzcholkow: 12  koszt: 264      sciezka: 0 1 8 4 6 2 11 9 7 5 3 10      czas: 1.069500 ms.
+
+
+PLIK: ../Graphs/tsp_13.txt
+BxB (low-cost)
+Ilosc wierzcholkow: 13  koszt: 269      sciezka: 0 10 3 5 7 9 11 2 6 4 8 1 12   czas: 0.550000 ms.
+BxB (DFS)
+Ilosc wierzcholkow: 13  koszt: 269      sciezka: 0 12 1 8 4 6 2 11 9 7 5 3 10   czas: 11.792900 ms.
+Dynamicznie
+Ilosc wierzcholkow: 13  koszt: 269      sciezka: 0 10 3 5 7 9 11 2 6 4 8 1 12   czas: 2.433200 ms.
+
+
+PLIK: ../Graphs/tsp_14.txt
+BxB (low-cost)
+Ilosc wierzcholkow: 14  koszt: 282      sciezka: 0 10 3 5 7 9 13 11 2 6 4 8 1 12        czas: 2.448400 ms.
+BxB (DFS)
+Ilosc wierzcholkow: 14  koszt: 282      sciezka: 0 12 1 8 4 6 2 11 13 9 7 5 3 10        czas: 32.504700 ms.
+Dynamicznie
+Ilosc wierzcholkow: 14  koszt: 282      sciezka: 0 10 3 5 7 9 13 11 2 6 4 8 1 12        czas: 6.019200 ms.
+
+
+PLIK: ../Graphs/tsp_15.txt
+BxB (low-cost)
+Ilosc wierzcholkow: 15  koszt: 291      sciezka: 0 10 3 5 7 9 13 11 2 6 4 8 14 1 12     czas: 10.800000 ms.
+BxB (DFS)
+Ilosc wierzcholkow: 15  koszt: 291      sciezka: 0 12 1 14 8 4 6 2 11 13 9 7 5 3 10     czas: 55.417000 ms.
+Dynamicznie
+Ilosc wierzcholkow: 15  koszt: 291      sciezka: 0 10 3 5 7 9 13 11 2 6 4 8 14 1 12     czas: 11.919600 ms.
+
+
+PLIK: ../Graphs/tsp_17_1.txt
+BxB (low-cost)
+Ilosc wierzcholkow: 17  koszt: 137      sciezka: 0 7 16 9 13 8 14 2 12 4 1 11 3 15 10 5 6       czas: 3.027600 ms.
+BxB (DFS)
+Ilosc wierzcholkow: 17  koszt: 137      sciezka: 0 7 16 9 13 8 14 2 12 4 1 11 3 15 10 5 6       czas: 99.530400 ms.
+Dynamicznie
+Ilosc wierzcholkow: 17  koszt: 137      sciezka: 0 7 16 9 13 8 14 2 12 4 1 11 3 15 10 5 6       czas: 111.835500 ms.
+
+
+PLIK: ../Graphs/tsp_18_1.txt
+BxB (low-cost)
+Ilosc wierzcholkow: 18  koszt: 146      sciezka: 0 7 1 13 4 3 15 16 12 2 8 14 5 10 11 9 17 6    czas: 65.485000 ms.
+BxB (DFS)
+Ilosc wierzcholkow: 18  koszt: 146      sciezka: 0 7 1 13 4 3 15 16 12 2 8 14 5 10 11 9 17 6    czas: 140.698200 ms.
+Dynamicznie
+Ilosc wierzcholkow: 18  koszt: 146      sciezka: 0 7 1 13 4 3 15 16 12 2 8 14 5 10 11 9 17 6    czas: 274.206200 ms.
+
+
+PLIK: ../Graphs/tsp_19_1.txt
+BxB (low-cost)
+Ilosc wierzcholkow: 19  koszt: 169      sciezka: 0 7 1 12 10 2 6 16 17 14 13 9 18 11 8 5 4 3 15         czas: 81.971700 ms.
+BxB (DFS)
+Ilosc wierzcholkow: 19  koszt: 169      sciezka: 0 7 1 12 10 2 6 16 17 14 13 9 18 11 8 5 4 3 15         czas: 245.681700 ms.
+Dynamicznie
+Ilosc wierzcholkow: 19  koszt: 169      sciezka: 0 7 1 12 10 2 6 16 17 14 13 9 18 11 8 5 4 3 15         czas: 675.860400 ms.
+
+
+PLIK: ../Graphs/tsp_20_1.txt
+BxB (low-cost)
+Ilosc wierzcholkow: 20  koszt: 148      sciezka: 0 7 9 10 6 2 5 8 14 4 19 13 3 15 1 11 18 17 12 16      czas: 7.798200 ms.
+BxB (DFS)
+Ilosc wierzcholkow: 20  koszt: 148      sciezka: 0 7 9 10 6 2 5 8 14 4 19 13 3 15 1 11 18 17 12 16      czas: 97.293200 ms.
+Dynamicznie
+Ilosc wierzcholkow: 20  koszt: 148      sciezka: 0 7 9 10 6 2 5 8 14 4 19 13 3 15 1 11 18 17 12 16      czas: 1590.011800 ms.
+
+
+
+Process finished with exit code 0
+
+

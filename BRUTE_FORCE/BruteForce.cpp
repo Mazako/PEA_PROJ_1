@@ -36,10 +36,15 @@ void BruteForce::iteratePermutations(int n, int *array, std::function<void(int *
 ShortestPathResults *BruteForce::performShortestPath(TspMatrix *matrix, long timeLimitInMillis) {
     auto start = std::chrono::high_resolution_clock::now();
     int *minPath = nullptr;
-    unsigned long long int lowestCost = INT64_MAX;
-    auto shortestPathCalculator = [&minPath, &lowestCost, &matrix](int* path){
+    unsigned long long lowestCost = 0;
+    bool everFound = false;
+    auto shortestPathCalculator = [&minPath, &lowestCost, &matrix, &everFound](int* path){
         unsigned long long cost = matrix->calculateCostThatExcludeZero(path);
-        if (cost < lowestCost) {
+        if (!everFound) {
+            lowestCost = cost;
+            everFound = true;
+            minPath = PeaUtils::copyArray(matrix->getN() - 1, path);
+        } else if (cost < lowestCost) {
             lowestCost = cost;
             delete[] minPath;
             minPath = PeaUtils::copyArray(matrix->getN() - 1, path);
@@ -74,11 +79,7 @@ MultipleShortestPathResults * BruteForce::performShortestPath(RandomTspMatrixSet
     auto **results = new ShortestPathResults *[set->getN()];
     for (int i = 0; i < set->getN(); i++) {
         auto matrix = set->getMatrices()[i];
-        std::cout << "MACIERZ: " << std::endl;
-        std::cout << PeaUtils::matrixToString(matrix) << std::endl;
         auto result = performShortestPath(matrix, timeLimitInMillis);
-        std::cout << result->toString() << std::endl;
-        delete matrix;
         results[i] = result;
     }
     return MultipleShortestPathResults::createFromShortestPathResults(set->getN(), results);

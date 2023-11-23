@@ -26,8 +26,6 @@ def check_python():
     for path in paths:
         with open(path) as file:
             length = int(file.readline())
-            print(length)
-            # print(list(islice(file, length)))
             matrix = numpy.array([[int(number) for number in row.replace('  ', ' ').strip().split(' ')] for row in list(islice(file, length))])
             print(path, 'cost=', solve_tsp_branch_and_bound(matrix)[1])
 

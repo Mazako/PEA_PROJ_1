@@ -1,5 +1,6 @@
 #include <iostream>
 #include "DynamicProgramming.h"
+#include "MultipleShortestPathResults.h"
 #include <chrono>
 
 ShortestPathResults *DynamicProgramming::solve(TspMatrix *matrix, long timeLimitInMillis) {
@@ -21,13 +22,14 @@ ShortestPathResults *DynamicProgramming::solve(TspMatrix *matrix, long timeLimit
  *
  *
  * **/
+    auto start = std::chrono::high_resolution_clock::now();
     delete memo;
     delete memoPath;
     int n = matrix->getN();
-    memo = new unsigned long *[n];
+    memo = new unsigned long long *[n];
     memoPath = new int *[n];
     for (int i = 0; i < n; i++) {
-        memo[i] = new unsigned long[1 << (n -1)];
+        memo[i] = new unsigned long long[1 << (n -1)];
         memoPath[i] = new int[1 << (n -1)];
         for (int j = 0; j < 1 << (n - 1); j++) {
             memo[i][j] = 0;
@@ -35,7 +37,6 @@ ShortestPathResults *DynamicProgramming::solve(TspMatrix *matrix, long timeLimit
         }
     }
 
-    auto start = std::chrono::high_resolution_clock::now();
 
     unsigned long long result = INT64_MAX;
     int bestChild = -1;
@@ -49,7 +50,6 @@ ShortestPathResults *DynamicProgramming::solve(TspMatrix *matrix, long timeLimit
         }
     }
     auto end = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
     int *path = new int[n];
     path[0] = 0;
     path[1] = bestChild;
@@ -59,7 +59,18 @@ ShortestPathResults *DynamicProgramming::solve(TspMatrix *matrix, long timeLimit
         path[i] = memoPath[bestChild][S];
         bestChild = path[i];
     }
+    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
     return new ShortestPathResults(result, n, path, duration.count());
+}
+
+MultipleShortestPathResults *DynamicProgramming::solve(RandomTspMatrixSet *set, long timeLimitInMillis) {
+    auto **results = new ShortestPathResults * [set->getN()];
+    for (int i = 0; i < set->getN(); i++) {
+        results[i] = solve(set->getMatrices()[i], timeLimitInMillis);
+    }
+    auto avg = PeaUtils::calculateAvgTime(set->getN(), results);
+    return MultipleShortestPathResults::createFromShortestPathResults(set->getN(), results);
+
 }
 
 unsigned long long int DynamicProgramming::step(TspMatrix *matrix, int vertex, int mask) {
