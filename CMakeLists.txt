@@ -32,4 +32,4 @@ add_executable(PEA_PROJ_1 main.cpp
         BRANCH_AND_BOUND_MATRIX_REDUCTION/REDUCED_TSP_MATRIX/ReducedTspMatrix.cpp
         BRANCH_AND_BOUND_MATRIX_REDUCTION/REDUCED_TSP_MATRIX/ReducedTspMatrix.h
         DYNAMIC_PROGRAMMING/DynamicProgramming.cpp
-        DYNAMIC_PROGRAMMING/DynamicProgramming.h)
+        DYNAMIC_PROGRAMMING/DynamicProgramming.h )

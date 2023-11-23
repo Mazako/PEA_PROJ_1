@@ -60,6 +60,14 @@ int *PeaUtils::createArrayFromZeroToNMinusOne(int n) {
     return arr;
 }
 
+int *PeaUtils::createArrayFromOneToNMinusOne(int n) {
+    int *arr = new int [n - 1];
+    for (int i = 1; i < n; i++) {
+        arr[i - 1] = i;
+    }
+    return arr;
+}
+
 TspMatrix *PeaUtils::readMatrixFromFile(const std::string &filename) {
     using namespace std;
     string line;

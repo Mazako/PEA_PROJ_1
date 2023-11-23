@@ -7,6 +7,12 @@ ShortestPathResults::~ShortestPathResults() {
 }
 
 std::string ShortestPathResults::toString() {
+    if (!success) {
+        std::string str;
+        str.append("Ilosc wierzcholkow: ").append(std::to_string(n));
+        str.append("\t PORAZKA");
+        return str;
+    }
     std::string str;
     str.append("Ilosc wierzcholkow: ").append(std::to_string(n));
     str.append("\tkoszt: ").append(std::to_string(cost));
@@ -14,7 +20,7 @@ std::string ShortestPathResults::toString() {
     for (int i = 0; i < n; i++) {
         str.append(std::to_string(path[i])).append(" ");
     }
-    str.append("\tczas: ").append(std::to_string(nanoTime)).append(" ms.");
+    str.append("\tczas: ").append(std::to_string((double) nanoTime / 1000)).append(" ms.");
     return str;
 }
 

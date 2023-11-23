@@ -9,6 +9,8 @@
 #include "MultipleShortestPathResults.h"
 
 
+enum BranchMode {DFS, LOW_COST};
+
 class BranchAndBoundMatrixReduction {
 private:
     static ReducedTspMatrix *reduceMatrix(int n,
@@ -19,9 +21,10 @@ private:
                                           int vertexFrom,
                                           int vertexTo);
 public:
-    static ShortestPathResults * solve(TspMatrix *matrix, long timeLimitInMillis);
-    static MultipleShortestPathResults * solve(RandomTspMatrixSet *set, long timeLimitInMillis);
-
+    static ShortestPathResults *solve(TspMatrix *matrix, long timeLimitInMillis, BranchMode branchMode);
+    static MultipleShortestPathResults *solve(RandomTspMatrixSet *set, long timeLimitInMillis, BranchMode branchMode);
+    static ShortestPathResults* solveLowCost(TspMatrix *matrix, long  timeLimitInMillis);
+    static ShortestPathResults* solveDfs(TspMatrix *matrix, long  timeLimitInMillis);
 };
 
 

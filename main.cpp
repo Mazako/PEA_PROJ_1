@@ -9,27 +9,17 @@
 
 using std::cout;
 using std::endl;
-const char *BRUTE_FORCE_ARG = "GENERATE_BRUTE";
-
-void generateBruteForceData(int matrixSize, int count);
 
 void menu();
 
 void fullTests();
 
 int main(int argc, char *argv[]) {
-    if (argc != 1) {
-        auto argument = argv[1];
-        int matrixSize = atoi(argv[2]);
-        int count = atoi(argv[3]);
-        if (strcmp(argument, BRUTE_FORCE_ARG) == 0) {
-            cout << "Starting program in brute_force data generation mode." << endl;
-            generateBruteForceData(matrixSize, count);
-        }
-    } else {
-        menu();
-    }
-
+//    auto matrix = PeaUtils::generateRandomTSPInstance(5);
+//    cout << BranchAndBoundMatrixReduction::solve(matrix, 100000, LOW_COST)->toString() << endl;
+//    cout << BranchAndBoundMatrixReduction::solve(matrix, 100000, DFS)->toString() << endl;
+//    cout << DynamicProgramming::solve(matrix, 100000)->toString() << endl;
+    fullTests();
 }
 
 void menu() {
@@ -57,7 +47,7 @@ void menu() {
             if (choice == "1") {
                 cout << BruteForce::performShortestPath(matrix, 10000000)->toString() << endl;
             } else if (choice == "2") {
-                cout << BranchAndBoundMatrixReduction::solve(matrix, 10000000)->toString() << endl;
+//                cout << BranchAndBoundMatrixReduction::solve(matrix, 10000000, nullptr)->toString() << endl;
             } else {
                 cout << DynamicProgramming::solve(matrix, 100000000)->toString() << endl;
             }
@@ -75,38 +65,34 @@ void fullTests() {
             "../Graphs/tsp_14.txt",
             "../Graphs/tsp_15.txt",
             "../Graphs/tsp_17_1.txt",
+            "../Graphs/tsp_17_bxb_killer.txt",
             "../Graphs/tsp_18_1.txt",
             "../Graphs/tsp_19_1.txt",
             "../Graphs/tsp_20_1.txt"
     };
 
-    for (const auto &fileName: filenames) {
-        cout << fileName << endl;
+    for (int i = 0; i < filenames.size(); i++) {
+        auto fileName = filenames[i];
+        cout << "PLIK: " << fileName << endl;
+        if (i < 7) {
+            auto matrix = PeaUtils::readMatrixFromFile(fileName);
+            cout << "BruteForce" << endl;
+            cout << BruteForce::performShortestPath(matrix, 300000)->toString() << endl;
+            delete matrix;
+        }
         auto matrix = PeaUtils::readMatrixFromFile(fileName);
-        cout << "BxB" << endl;
-        cout << BranchAndBoundMatrixReduction::solve(matrix, 1000000000)->toString() << endl;
+        cout << "BxB (low-cost)" << endl;
+        cout << BranchAndBoundMatrixReduction::solve(matrix, 300000, LOW_COST)->toString() << endl;
+        delete matrix;
+        matrix = PeaUtils::readMatrixFromFile(fileName);
+        cout << "BxB (DFS)" << endl;
+        cout << BranchAndBoundMatrixReduction::solve(matrix, 300000, DFS)->toString() << endl;
+        delete matrix;
+        matrix = PeaUtils::readMatrixFromFile(fileName);
         cout << "Dynamicznie" << endl;
-        cout << DynamicProgramming::solve(matrix, 1000000000)->toString() << endl;
+        cout << DynamicProgramming::solve(matrix, 300000)->toString() << endl;
         delete matrix;
     }
 }
 
 
-void generateBruteForceData(int matrixSize, int count) {
-    std::ofstream file;
-    file.open("brute_force_sample.txt");
-    file << matrixSize << " " << count << endl << endl;
-    auto set = new RandomTspMatrixSet(count, matrixSize);
-    for (int i = 0; i < count; i++) {
-        auto currMatrix = set->getMatrices()[i];
-        file << PeaUtils::matrixToString(currMatrix) << endl;
-        auto result = BruteForce::performShortestPath(currMatrix, 1000000);
-        file << result->getCost() << ";" << PeaUtils::arrayToString(result->getN(), result->getPath()) << endl;
-        if (i != count - 1) {
-            file << endl;
-        }
-        delete result;
-    }
-    delete set;
-    file.close();
-}

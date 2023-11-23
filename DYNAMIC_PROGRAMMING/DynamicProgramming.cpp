@@ -49,7 +49,7 @@ ShortestPathResults *DynamicProgramming::solve(TspMatrix *matrix, long timeLimit
         }
     }
     auto end = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
     int *path = new int[n];
     path[0] = 0;
     path[1] = bestChild;

@@ -4,8 +4,7 @@
 
 BruteForce::BruteForce() = default;
 
-void
-BruteForce::iteratePermutations(int n, int *array, std::function<void(int *)> iterateFunction, long timeLimitInMillis) {
+void BruteForce::iteratePermutations(int n, int *array, std::function<void(int *)> iterateFunction, long timeLimitInMillis) {
     auto start = std::chrono::high_resolution_clock::now();
     auto c = new int[n];
     for (int i = 0; i < n; i++) {
@@ -39,25 +38,31 @@ ShortestPathResults *BruteForce::performShortestPath(TspMatrix *matrix, long tim
     int *minPath = nullptr;
     unsigned long long int lowestCost = INT64_MAX;
     auto shortestPathCalculator = [&minPath, &lowestCost, &matrix](int* path){
-        unsigned long long cost = matrix->calculateCost(path);
+        unsigned long long cost = matrix->calculateCostThatExcludeZero(path);
         if (cost < lowestCost) {
             lowestCost = cost;
             delete[] minPath;
-            minPath = PeaUtils::copyArray(matrix->getN(), path);
+            minPath = PeaUtils::copyArray(matrix->getN() - 1, path);
         }
     };
     try {
-        int *permutationBase = PeaUtils::createArrayFromZeroToNMinusOne(matrix->getN());
-        iteratePermutations(matrix->getN(),
+        int *permutationBase = PeaUtils::createArrayFromOneToNMinusOne(matrix->getN());
+        iteratePermutations(matrix->getN() - 1,
                             permutationBase,
                             shortestPathCalculator,
                             timeLimitInMillis);
         auto end = std::chrono::high_resolution_clock::now();
         delete[] permutationBase;
-        long long time = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+        long long time = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+        int *resultArr = new int[matrix->getN()];
+        resultArr[0] = 0;
+        for (int i = 1; i < matrix->getN(); i++) {
+            resultArr[i] = minPath[i - 1];
+        }
+        delete minPath;
         return new ShortestPathResults(lowestCost,
                                        matrix->getN(),
-                                       minPath,
+                                       resultArr,
                                        time);
     } catch (std::invalid_argument& invalid_argument) {
         std::cout << "Time limit exceded" << std::endl;

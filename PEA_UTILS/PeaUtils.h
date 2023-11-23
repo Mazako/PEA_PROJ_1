@@ -26,6 +26,8 @@ public:
 
     static int *createArrayFromZeroToNMinusOne(int n);
 
+    static int *createArrayFromOneToNMinusOne(int n);
+
     static std::vector<int> createVectorFromZeroToNMinusOne(int n);
 
     static int randomInt();

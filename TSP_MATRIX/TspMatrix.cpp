@@ -33,3 +33,15 @@ unsigned long long int TspMatrix::calculateCost(const int *path) {
     totalCost += matrix[v2][first];
     return totalCost;
 }
+
+unsigned long long int TspMatrix::calculateCostThatExcludeZero(const int *path) {
+    unsigned long long int totalCost = matrix[0][path[0]] + matrix[path[n - 2]][0];
+    int v1 = path[0];
+    int v2;
+    for (int i = 1; i < n - 1; i++) {
+        v2 = path[i];
+        totalCost += matrix[v1][v2];
+        v1 = v2;
+    }
+    return totalCost;
+}
